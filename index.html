@@ -1,150 +1,147 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ふかげーむ</title>
 <style>
-:root{--sky:#0b1430;--sky2:#172a52;--panel:#fff;--ink:#202a3b;--muted:#718096;--line:#dfe5ef;--gold:#d8ba63;--blue:#385fbe;--soft:#f1f4f9}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#091126;color:var(--ink)}
-body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
-.app{width:min(760px,100%);margin:auto;min-height:100vh;background:linear-gradient(#101b39 0 250px,#eef2f7 250px);padding:12px 12px 20px}
-.top{color:#fff;padding:8px 4px 12px}.brand{display:flex;justify-content:space-between;align-items:center}.brand h1{font-size:22px;margin:0;letter-spacing:.08em}.brand small{color:#bfcbed}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.stat{background:#17284d;border:1px solid #31436c;border-radius:10px;padding:8px 9px}.stat span{display:block;font-size:10px;color:#aebbd8}.stat b{font-size:15px;color:#fff}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 5px 18px #07112b12}.hero{background:radial-gradient(circle at 80% 25%,#ffffff22 0 1px,transparent 2px),radial-gradient(circle at 24% 30%,#ffffff18 0 1px,transparent 2px),linear-gradient(145deg,#17284d,#2b4274);color:#fff;border-color:#3b507e;min-height:126px;position:relative;overflow:hidden}.hero:after{content:"✦   ·     ✧        ·   ✦";position:absolute;right:12px;bottom:12px;color:#dbe5ff66;font-size:11px;letter-spacing:4px}.eyebrow{font-size:10px;letter-spacing:1.6px;color:#b9c7e8}.hero h2{margin:6px 0 3px;font-size:22px}.hero p{margin:0;color:#d5def1;font-size:13px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.section-head h2{font-size:16px;margin:0}.pill{font-size:10px;font-weight:900;border:1px solid #d8dfeb;background:#f5f7fb;border-radius:99px;padding:5px 8px;color:#596985}.notice{padding:8px 0;border-bottom:1px solid #edf0f5;font-size:12px;line-height:1.5}.notice:last-child{border-bottom:0}.time{font-size:10px;color:#9aa5b5}.chat-log{height:190px;overflow-y:auto;font-size:12px;line-height:1.55}.chat-compose{display:grid;grid-template-columns:68px 1fr 46px;gap:7px;padding-top:9px;border-top:1px solid #edf0f5}.chat-compose select,.chat-compose input{min-width:0;border:1px solid #d9e0eb;border-radius:9px;padding:10px;font-size:13px;background:#fff}.send{border:0;border-radius:9px;background:#253d79;color:#fff;font-weight:900}.hidden{display:none!important}.listrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #edf0f5;font-size:13px}.listrow:last-child{border-bottom:0}.muted{color:var(--muted);font-size:12px}.action{border:0;border-radius:10px;background:#294786;color:#fff;padding:11px 15px;font-weight:900}.secondary{border:1px solid #d8dfeb;background:#fff;color:#4f607e;border-radius:9px;padding:8px 12px;font-weight:800}.explore-status{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.explore-status>div{background:var(--soft);border-radius:10px;padding:10px}.explore-status span{display:block;color:#7b8799;font-size:10px}.explore-status b{display:block;font-size:15px;margin-top:3px}.ghead{display:flex;justify-content:space-between;font-size:12px;font-weight:900;margin-bottom:6px}.gauge{height:11px;background:#e7ebf2;border-radius:99px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#5d78cf,#d7b85f);border-radius:99px;transition:width .2s}.gfoot{display:flex;justify-content:space-between;font-size:10px;color:#8b96a7;margin-top:5px}.batches{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0}.batch{border:1px solid #d9e0eb;background:#fff;color:#65738c;border-radius:9px;padding:9px 3px;font-weight:900}.batch.active{background:#263f7b;color:#fff;border-color:#263f7b}.wide{width:100%}.footer{position:fixed;z-index:50;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100%);height:78px;padding-bottom:env(safe-area-inset-bottom);background:#0e1934;border-top:1px solid #304163;display:grid;grid-template-columns:repeat(5,1fr);box-shadow:0 -6px 20px #0005}.foot{position:relative;border:0;background:transparent;color:#8997b5;font-size:11px;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.foot .ico{font-size:21px;line-height:1}.foot.active{color:#e1c46c}.foot.active:before{content:"";position:absolute;top:0;width:54px;height:3px;background:#d8ba63;border-radius:0 0 4px 4px}.empty{padding:16px 0;color:#8793a5;font-size:12px}.notice-btn{font-size:11px}.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini{background:#f4f6fa;border-radius:10px;padding:10px}.mini b{display:block;font-size:16px}.mini span{font-size:10px;color:#7b8799}.modalback{position:fixed;inset:0;background:#06102bcc;z-index:100;display:flex;align-items:flex-end;justify-content:center}.modal{width:min(760px,100%);background:#fff;border-radius:18px 18px 0 0;padding:16px;max-height:80vh;overflow:auto}
+*{box-sizing:border-box}body{margin:0;background:#f4e8ea;color:#26364d;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+.app{max-width:760px;margin:auto;background:linear-gradient(180deg,#101a35 0,#172442 42%,#edf1f7 42%);min-height:100vh;padding:12px 12px 112px}.top{padding:8px 0 10px;border-bottom:1px solid #e3e7ed}.title{text-align:center;color:#c90000;font-size:24px;font-weight:900}.sub{text-align:center;color:#c84b4b;font-weight:800}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:10px}.tabs button{padding:9px 2px;border:1px solid #d7e0ea;border-radius:8px;background:#f8fafc;font-weight:800;color:#596a7f}.tabs .on{background:#1683bd;color:#fff}
+.card{border:1px solid #dce3ec;border-radius:14px;padding:14px;margin:11px 0;background:#fff;box-shadow:0 2px 7px #0000000a}.hero{border-top:6px solid #df1616;text-align:center}.hero h1{color:#d10b0b;margin:3px 0;font-size:28px}.hero p{margin:0;color:#b24a4a;font-weight:800}
+.player{border:3px solid #f4c927;border-radius:15px;overflow:hidden;background:#fffdf2}.pname{text-align:center;background:#fff1bf;color:#734317;font-size:20px;font-weight:900;padding:9px}.table{width:100%;border-collapse:collapse}.table td{border:1px solid #e5dfca;padding:8px;text-align:center}.label{font-weight:800;color:#60718a}
+.status{border:1px solid #dce3ec;border-radius:14px;padding:13px}.bar{height:9px;background:#edf1f5;border-radius:8px;overflow:hidden;margin:6px 0 12px}.bar i{display:block;height:100%;background:#347fea}.notice{padding:9px 0;border-bottom:1px solid #e6e9ed}.notice:last-child{border:0}.time{font-size:11px;color:#8a96a6}.green{color:#008e55;font-weight:900}.orange{color:#d66a00;font-weight:900}
+.action{width:100%;border:0;border-radius:12px;padding:15px;background:#e87500;color:#fff;font-size:19px;font-weight:900;box-shadow:0 3px 0 #b65300}.secondary{background:#1683bd;box-shadow:0 3px 0 #0d5e88}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hidden{display:none}.listrow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e5e8ed}.listrow:last-child{border:0}.badge{display:inline-block;border-radius:7px;background:#ffb000;color:#fff;font-weight:900;padding:2px 7px}
+
+.chat-card{padding-bottom:0;overflow:hidden}.chat-log{height:250px;overflow-y:auto;line-height:1.55;padding-right:4px;scroll-behavior:smooth}.chat-compose{position:sticky;bottom:0;display:grid;grid-template-columns:78px 1fr 50px;gap:8px;padding:10px 0 12px;background:#fff;border-top:1px solid #e5e9ef}.chat-compose select,.chat-compose input{min-width:0;border:1px solid #dce3ec;border-radius:10px;padding:11px;font-size:15px;background:#fff}.send{border:0;border-radius:11px;background:#2450b7;color:#fff;font-size:20px;font-weight:900;box-shadow:0 3px 0 #183a88}.footer{position:fixed;z-index:30;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100vw);height:78px;background:#fff;border-top:1px solid #dfe4eb;display:grid;grid-template-columns:repeat(5,1fr);box-shadow:0 -3px 12px #0000000c;padding-bottom:env(safe-area-inset-bottom)}.foot{border:0;background:#fff;color:#8b96a6;font-size:12px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.foot span{font-size:25px;line-height:1}.foot.on{color:#b98a13}.foot.on:before{content:"";position:absolute;top:0;width:64px;height:4px;background:#d9ae35;border-radius:0 0 5px 5px}.footer button{position:relative}.quick-title{margin:0 0 8px}.placeholder-note{color:#7c8797;font-size:14px;line-height:1.7}
+
+.explore-paper{border:2px solid #d9cdb9;border-radius:20px;padding:18px 16px 22px;background:linear-gradient(#fffdf8,#fff);box-shadow:0 4px 14px rgba(80,60,40,.08)}
+.explore-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.explore-title{font-size:25px;margin:0;color:#3f3a34}.tag{display:inline-flex;align-items:center;gap:6px;border:2px solid #4d7d5b;color:#416c4e;border-radius:14px;padding:8px 12px;font-weight:900;background:#fff}
+.gauge{height:18px;background:#ece5da;border:2px solid #dccfbd;border-radius:999px;overflow:hidden}.gauge i{display:block;height:100%;border-radius:999px;background:#4f8060}.gauge.boss i{background:#b95737}.gauge-label{display:flex;justify-content:space-between;align-items:center;margin:6px 2px 4px;font-weight:800;color:#655c52}.gauge-label strong{font-size:18px}.explore-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:12px 0;color:#655c52}.selector{display:flex;align-items:center;justify-content:space-between;border:2px solid #e0d6c6;border-radius:14px;padding:12px;margin-top:12px}.selector button{border:0;background:#eee7db;border-radius:10px;padding:8px 13px;font-weight:900}.start-big{width:100%;margin-top:14px!important;padding:15px!important;font-size:18px!important}.boss-big{background:#b95737!important}.mini-note{font-size:12px;color:#82776a;margin-top:9px}
+
+:root{--night:#101a35;--night2:#172442;--ink:#202b3d;--muted:#71809a;--line:#dfe5ee;--gold:#d7b85b;--blue:#3d65c5}
+body{margin:0;background:#0c142a;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{box-shadow:0 0 35px #0004}
+.card{background:#fff;border:1px solid #dfe5ee;border-radius:14px;box-shadow:0 5px 18px #07112b12;margin:10px 0;padding:14px}
+.night-card{background:radial-gradient(circle at 82% 18%,#5e6fbb33 0 2px,transparent 3px),radial-gradient(circle at 18% 35%,#fff8 0 1px,transparent 2px),linear-gradient(145deg,#111c3b,#24345c);color:#fff;border-color:#31436f;min-height:100px;position:relative;overflow:hidden}
+.night-card:after{content:"✦  ·  ·    ✧       ·  ✦";position:absolute;right:18px;bottom:13px;color:#dce6ff77;letter-spacing:8px;font-size:12px}
+.eyebrow{font-size:10px;letter-spacing:1.6px;color:#bfcdf5;margin-bottom:4px}.muted-light{color:#d0d9ee;margin:4px 0;font-size:13px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.section-head h2{margin:0}.pill{font-size:10px;font-weight:900;letter-spacing:1px;color:#53648a;background:#eef2f9;border:1px solid #d8dfec;border-radius:99px;padding:5px 8px}
+.explore-status{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.explore-status>div{background:#f4f6fa;border-radius:10px;padding:10px}.explore-status span{display:block;color:#7b8799;font-size:11px}.explore-status b{display:block;margin-top:3px;font-size:16px}
+.boss-gauge{margin:12px 0 16px}.gauge-head,.gauge-foot{display:flex;justify-content:space-between;align-items:center;font-size:12px}.gauge-head{margin-bottom:7px}.gauge-head span{font-weight:900;color:#4c6090}.gauge{height:11px;border-radius:99px;background:#e8edf5;overflow:hidden;border:1px solid #d8dfeb}.gauge-fill{height:100%;width:0;background:linear-gradient(90deg,#637bd0,#d2b55a);border-radius:99px;transition:width .25s}.gauge-foot{color:#8994a5;margin-top:5px;font-size:10px}
+.batch-row{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:10px 0}.batch{border:1px solid #d8dfeb;background:#fff;color:#61708a;border-radius:9px;padding:9px 4px;font-weight:900}.batch.active{background:#253b73;color:#fff;border-color:#253b73}.explore-start{width:100%;margin-top:3px}
+.notice{font-size:12px;line-height:1.55;margin:4px 0;color:#4d5a70}.chat-log{font-size:12px}
+.footer{background:#101a35;border-top:1px solid #2d3b60;box-shadow:0 -5px 18px #0005}.foot{background:#101a35;color:#8996b3}.foot.on{color:#e0c36d}.foot.on:before{background:#d7b85b}.foot span{font-size:22px}
+.chat-compose{background:#fff}
 </style>
 </head>
-<body>
-<div class="app">
-  <header class="top">
-    <div class="brand"><h1>ふかげーむ</h1><small>星明かりの冒険</small></div>
-    <div class="stats">
-      <div class="stat"><span>LEVEL</span><b id="lv">1</b></div>
-      <div class="stat"><span>GOLD</span><b id="gold">100</b></div>
-      <div class="stat"><span>STAMINA</span><b id="sta">500 / 500</b></div>
-    </div>
-  </header>
-
-  <main>
-    <section id="home">
-      <div class="card hero"><div class="eyebrow">HOME / ADVENTURER</div><h2>星を追う冒険者</h2><p>探索、鍛錬、素材集め。自分のペースで進もう。</p></div>
-      <div class="card">
-        <div class="section-head"><h2>今日の状況</h2><span class="pill" id="stafull">スタミナ満タン</span></div>
-        <div class="mini-grid" style="margin-top:10px">
-          <div class="mini"><span>ボス進行</span><b id="homeBoss">0 / 10</b></div>
-          <div class="mini"><span>現在地</span><b style="font-size:14px">はじまりの草原</b></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="section-head"><h2>お知らせ</h2><button class="secondary notice-btn" onclick="clearNotices()">既読にする</button></div>
-        <div id="notices"></div>
-      </div>
-      <div class="card">
-        <div class="section-head"><h2>全体チャット</h2><span class="pill">ONLINE</span></div>
-        <div class="chat-log" id="chatLog"></div>
-        <div class="chat-compose">
-          <select id="chatChannel"><option>全体</option><option>システム</option></select>
-          <input id="chatInput" maxlength="80" placeholder="メッセージを入力">
-          <button class="send" onclick="sendChat()">送信</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="explore" class="hidden">
-      <div class="card hero"><div class="eyebrow">EXPLORE / STARTER FIELD</div><h2>はじまりの草原</h2><p>無属性の敵が棲む、最初の探索エリア。</p></div>
-      <div class="card">
-        <div class="section-head"><h2>探索待機</h2><span class="pill">NORMAL</span></div>
-        <div class="explore-status">
-          <div><span>スタミナ</span><b id="esta">500 / 500</b></div>
-          <div><span>1回の消費</span><b>1 STAMINA</b></div>
-        </div>
-        <div>
-          <div class="ghead"><span>ボス出現まで</span><span id="bossText">0 / 10</span></div>
-          <div class="gauge"><div class="fill" id="bossFill"></div></div>
-          <div class="gfoot"><span>通常モンスター撃破</span><span>10体でボス</span></div>
-        </div>
-        <div class="batches">
-          <button class="batch active" data-n="1">×1</button><button class="batch" data-n="5">×5</button><button class="batch" data-n="10">×10</button><button class="batch" data-n="0">全力</button>
-        </div>
-        <button class="action wide" id="exploreStart">探索開始</button>
-      </div>
-      <div class="card">
-        <div class="section-head"><h2>探索情報</h2></div>
-        <div class="listrow"><span>通常モンスター</span><span>6種</span></div>
-        <div class="listrow"><span>レア</span><span>きらめきスライム</span></div>
-        <div class="listrow"><span>ボス</span><span>草原の守護獣</span></div>
-        <div class="listrow"><span>撃破数</span><b id="ekills">0</b></div>
-      </div>
-    </section>
-
-    <section id="character" class="hidden">
-      <div class="card hero"><div class="eyebrow">ADVENTURER</div><h2>冒険者</h2><p>まだ職業を持たない、はじまりの冒険者。</p></div>
-      <div class="card"><div class="listrow"><span>Lv</span><b id="clv">1</b></div><div class="listrow"><span>EXP</span><b id="exp">0 / 20</b></div><div class="listrow"><span>POW</span><b>10</b></div><div class="listrow"><span>INT</span><b>10</b></div><div class="listrow"><span>AGI</span><b>10</b></div><div class="listrow"><span>LUK</span><b>10</b></div></div>
-      <div class="card"><div class="section-head"><h2>装備</h2><span class="muted">初期2枠</span></div><div class="listrow"><span>武器</span><span>未装備</span></div><div class="listrow"><span>防具</span><span>未装備</span></div></div>
-      <div class="card"><div class="section-head"><h2>ペット</h2><span class="muted">0 / 3</span></div><div class="empty">まだ仲間になったペットはいません。</div></div>
-    </section>
-
-    <section id="shop" class="hidden">
-      <div class="card hero"><div class="eyebrow">TOWN / WORKSHOP</div><h2>商店街</h2><p>素材を集めて装備を作り、少しずつ強くなる。</p></div>
-      <div class="card"><div class="listrow"><b>鍛冶屋</b><button class="secondary" onclick="openModal('鍛冶屋','武器・防具の製作と強化をここから行えるようにする予定。')">開く</button></div><div class="listrow"><b>素材売却</b><button class="secondary" onclick="openModal('素材売却','素材をゴールドに換える場所。')">開く</button></div><div class="listrow"><b>プレイヤーマーケット</b><button class="secondary" onclick="openModal('プレイヤーマーケット','プレイヤー同士で素材などを売買する場所。')">準備中</button></div></div>
-    </section>
-
-    <section id="info" class="hidden">
-      <div class="card hero"><div class="eyebrow">LIBRARY / ENCYCLOPEDIA</div><h2>情報</h2><p>出会ったモンスターや素材の記録。</p></div>
-      <div class="card"><div class="section-head"><h2>モンスター図鑑</h2><span class="pill">6 +</span></div><div id="ency"></div></div>
-      <div class="card"><div class="listrow"><span>マテリア</span><span>詳細は今後追加</span></div><div class="listrow"><span>大アルカナ</span><span>22枚</span></div></div>
-    </section>
-  </main>
+<body><div class="app">
+<div class="top"><div class="title">ふかげーむ</div><div class="sub">星見の巡礼路</div>
 </div>
 
+<section id="home">
+<div class="card hero"><h1>探索</h1><p>星見の巡礼路</p></div>
+<div class="player"><div class="pname">冒険者</div><table class="table"><tr><td class="label">Lv</td><td id="lv">1</td><td class="label">EXP</td><td id="exp">0 / 20</td></tr><tr><td class="label">HP</td><td>100 / 100</td><td class="label">G</td><td id="gold">100</td></tr></table></div>
+<div class="card"><h2 style="margin:0 0 10px">探索状況</h2><div>スタミナ <b id="sta">500 / 500</b></div><div style="font-size:12px;color:#7b8798;margin-top:4px">次の回復まで <b id="regen">満タン</b></div><div class="bar"><i id="stabar" style="width:100%"></i></div><div class="listrow"><span>通常モンスター撃破</span><b id="kills">0 / 10</b></div><div class="listrow"><span>ボス</span><span>10体撃破で挑戦可能</span></div></div>
+<div class="card"><h2 style="margin:0 0 10px">探索する</h2><div class="row"><button class="action" onclick="startBattle(1)">1回</button><button class="action" onclick="startBattle(10)">10回</button></div><p style="font-size:12px;color:#7b8798;text-align:center">戦闘は専用ページへ移動します。結果はホームのお知らせに記録されます。</p></div>
+<div class="card"><h2 style="margin:0 0 8px">お知らせ</h2><div id="notices"></div></div>
+<div class="card chat-card"><h2 style="margin:0 0 8px">全体チャット</h2><div class="chat-log" id="chatLog"><div class="notice"><b>システム</b>　ふかげーむへようこそ。</div><div class="notice"><b>冒険者A</b>　素材集め中！</div><div id="chat"></div></div><div class="chat-compose"><select id="chatChannel"><option>全体</option><option>システム</option></select><input id="chatInput" placeholder="メッセージ" autocomplete="off"><button class="send" onclick="sendChat()">▶</button></div></div>
+</section>
+
+<section id="explore" class="hidden">
+  <div class="card night-card">
+    <div class="eyebrow">EXPLORE / STARTER FIELD</div>
+    <h1>星見の巡礼路</h1>
+    <p class="muted-light">星明かりの下、冒険を始めよう。</p>
+  </div>
+  <div class="card">
+    <div class="section-head"><h2>探索待機</h2><span class="pill">NORMAL</span></div>
+    <div class="explore-status">
+      <div><span>スタミナ</span><b id="esta">500 / 500</b></div><div><span>次の回復</span><b id="eregen">満タン</b></div>
+      <div><span>探索回数</span><b>1回 = 1スタミナ</b></div>
+    </div>
+    <div class="boss-gauge">
+      <div class="gauge-head"><b>ボス出現まで</b><span id="bossText">0 / 10</span></div>
+      <div class="gauge"><div id="bossFill" class="gauge-fill"></div></div>
+      <div class="gauge-foot"><span>通常モンスター撃破</span><span>10体でボス出現</span></div>
+    </div>
+    <div class="batch-row">
+      <button class="batch active" onclick="setBatch(1,this)">×1</button>
+      <button class="batch" onclick="setBatch(5,this)">×5</button>
+      <button class="batch" onclick="setBatch(10,this)">×10</button><button class="batch" onclick="setBatch(50,this)">×50</button>
+      <button class="batch" onclick="setBatch(0,this)">全力</button>
+    </div>
+    <button class="action explore-start" onclick="startSelectedBattle()">探索開始</button><button id="bossButton" class="action boss-big" style="display:none;margin-top:8px" onclick="startBoss()">星喰みの獣に挑戦</button>
+  </div>
+  <div class="card">
+    <div class="section-head"><h2>探索情報</h2></div>
+    <div class="listrow"><span>撃破数</span><b id="ekills">0</b></div>
+    <div class="listrow"><span>出現する敵</span><span>6種 + レア + ボス</span></div>
+    <div class="listrow"><span>属性</span><span>無属性</span></div>
+  </div>
+</section>
+<section id="shop" class="hidden"><div class="card"><h2>商店街</h2><div class="listrow"><span>鍛冶屋</span><button class="secondary" onclick="openPage('forge')">開く</button></div><div class="listrow"><span>素材売却</span><span class="placeholder-note">準備中</span></div><div class="listrow"><span>プレイヤーマーケット</span><span class="placeholder-note">準備中</span></div></div></section>
+<section id="forge" class="hidden"><div class="card"><h2>鍛冶屋</h2><p class="mini-note">星見の巡礼路で集めた素材から、最初の装備を作れる。</p><div id="materials" class="listrow"></div><h3>武器</h3><div id="weaponList"></div><h3>防具</h3><div id="armorList"></div></div></section>
+<section id="character" class="hidden"><div class="card"><h2>キャラクター</h2><div class="listrow"><span>Lv</span><b id="clv">1</b></div><div class="listrow"><span>POW</span><b>0</b></div><div class="listrow"><span>INT</span><b>0</b></div><div class="listrow"><span>AGI</span><b>0</b></div><div class="listrow"><span>LUK</span><b>0</b></div></div></section>
+<section id="pet" class="hidden"><div class="card"><h2>ペット</h2><p>まだペットはいない。</p></div></section>
+<section id="info" class="hidden"><div class="card"><h2>モンスター図鑑</h2><div id="ency"></div></div></section>
+
 <nav class="footer">
-  <button class="foot active" data-page="home"><span class="ico">⌂</span><b>街</b></button>
-  <button class="foot" data-page="explore"><span class="ico">✦</span><b>探索</b></button>
-  <button class="foot" data-page="character"><span class="ico">♜</span><b>冒険者</b></button>
-  <button class="foot" data-page="shop"><span class="ico">⚒</span><b>商店街</b></button>
-  <button class="foot" data-page="info"><span class="ico">✧</span><b>情報</b></button>
+  <button class="foot on" data-page="home"><span>⌂</span><b>街</b></button>
+  <button class="foot" data-page="explore"><span>✦</span><b>探索</b></button>
+  <button class="foot" data-page="character"><span>♜</span><b>冒険者</b></button>
+  <button class="foot" data-page="shop"><span>⚒</span><b>商店街</b></button>
+  <button class="foot" data-page="info"><span>✧</span><b>情報</b></button>
 </nav>
-
-<div id="modal" class="modalback hidden" onclick="closeModal(event)"><div class="modal" onclick="event.stopPropagation()"><div class="section-head"><h2 id="modalTitle"></h2><button class="secondary" onclick="closeModal()">閉じる</button></div><p id="modalText" class="muted" style="font-size:14px;line-height:1.7"></p></div></div>
-
+</div>
 <script>
-const KEY="fukagame_v8";
-const enemies=["くさねずみ","つのうさぎ","ころころスライム","いたずらコボルト","森のまじゅつ師","おおきなキノコ"];
-const defaultState={lv:1,exp:0,gold:100,sta:500,kills:0,chat:[{n:"システム",m:"ふかげーむへようこそ。",t:"--:--"}],notices:[{m:"探索を始めると専用の戦闘画面へ移動します。",t:"今"}],pending:0};
-let state=load(), selected=1;
-function load(){try{return Object.assign(defaultState,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){return {...defaultState}}}
-function save(){localStorage.setItem(KEY,JSON.stringify(state))}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+const enemies=["ほしくずねずみ","つきかげうさぎ","ほしつぶスライム","ほしよいコボルト","星詠みのまじゅつ師","よぞらキノコ"];
+let state=JSON.parse(localStorage.getItem("stella")||'{"lv":1,"exp":0,"gold":100,"sta":500,"kills":0,"notices":[],"chat":[],"starShard":0,"bossShard":0,"crafted":[],"lastRegen":0}');
+state.starShard??=0;state.bossShard??=0;state.crafted??=[];state.notices??=[];state.chat??=[];state.lastRegen??=Date.now();
+function save(){localStorage.setItem("stella",JSON.stringify(state));render()}
 function render(){
-  const q=id=>document.getElementById(id);
-  q("lv").textContent=state.lv;q("clv").textContent=state.lv;q("gold").textContent=state.gold;q("sta").textContent=state.sta+" / 500";
-  q("exp").textContent=state.exp+" / "+(state.lv*20);q("esta").textContent=state.sta+" / 500";q("ekills").textContent=state.kills;
-  const bc=state.kills%10;q("bossText").textContent=bc+" / 10";q("bossFill").style.width=(bc*10)+"%";q("homeBoss").textContent=bc+" / 10";
-  q("stafull").textContent=state.sta>=500?"スタミナ満タン":"回復中";
-  q("notices").innerHTML=state.notices.slice(-8).reverse().map(x=>'<div class="notice"><div class="time">'+esc(x.t)+'</div>'+x.m+'</div>').join("")||'<div class="empty">まだお知らせはありません。</div>';
-  q("chatLog").innerHTML=state.chat.slice(-30).map(x=>'<div class="notice"><b>'+esc(x.n)+'</b>　'+esc(x.m)+'<div class="time">'+esc(x.t)+'</div></div>').join("");
-  q("ency").innerHTML=enemies.map(x=>'<div class="listrow"><span>'+esc(x)+'</span><span class="muted">未確認</span></div>').join("");
-  q("chatLog").scrollTop=q("chatLog").scrollHeight;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+ set("lv",state.lv);set("clv",state.lv);set("exp",state.exp+" / "+state.lv*20);set("gold",state.gold);set("sta",state.sta+" / 500");
+ const bar=document.getElementById("stabar");if(bar)bar.style.width=(state.sta/5)+"%";
+ set("kills",(state.kills%10)+" / 10");set("esta",state.sta+" / 500");set("ekills",state.kills);
+ const bc=state.kills%10;set("bossText",bc+" / 10");const bf=document.getElementById("bossFill");if(bf)bf.style.width=(bc*10)+"%";
+ const bb=document.getElementById("bossButton");if(bb)bb.style.display=bc===0&&state.kills>0?"block":"none";
+ set("stafull",state.sta>=500?"スタミナ満タン":"回復中");updateRegen();
+ const n=document.getElementById("notices");if(n)n.innerHTML=state.notices.slice(-8).reverse().map(x=>'<div class="notice"><div class="time">'+x.t+'</div>'+x.m+'</div>').join("")||'<div class="time">まだお知らせはありません。</div>';
+ const c=document.getElementById("chat");if(c)c.innerHTML=state.chat.slice(-5).map(x=>'<div class="notice"><b>'+x.n+'</b>　'+x.m+'</div>').join("");
+ const enc=document.getElementById("ency");if(enc)enc.innerHTML=enemies.map(x=>'<div class="listrow"><span>'+x+'</span><span>未確認</span></div>').join("");
+ const mat=document.getElementById("materials");if(mat)mat.innerHTML='<span>星の欠片</span><b>'+state.starShard+'個</b>'+(state.bossShard?'<span style="margin-left:12px">星の大欠片</span><b>'+state.bossShard+'個</b>':'');
+ renderForge();
 }
-function now(){return new Date().toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"})}
-function sendChat(){const input=document.getElementById("chatInput"),v=input.value.trim();if(!v)return;state.chat.push({n:"冒険者",m:v,t:now()});input.value="";save();render()}
-function clearNotices(){state.notices=[];save();render()}
-function openModal(title,text){document.getElementById("modalTitle").textContent=title;document.getElementById("modalText").textContent=text;document.getElementById("modal").classList.remove("hidden")}
-function closeModal(){document.getElementById("modal").classList.add("hidden")}
+function startBattle(count){if(state.sta<count){alert("スタミナが足りないよ");return} state.pending=count;save();location.href="battle.html"}
+let exploreCount=1;
+function changeExplore(n){exploreCount=Math.max(1,Math.min(10,state.sta,exploreCount+n));document.getElementById("ecount").textContent=exploreCount;document.getElementById("ecount2").textContent=exploreCount;document.getElementById("ecost").textContent=exploreCount;document.getElementById("erem").textContent=Math.max(0,state.sta-exploreCount)}
+function beginExplore(){let n=document.getElementById("allStamina").checked?Math.min(10,state.sta):exploreCount;startBattle(n)}
+function sendChat(){let v=document.getElementById("chatInput").value.trim();if(!v)return;state.chat.push({n:"冒険者",m:v});document.getElementById("chatInput").value="";save()}
+
+let selectedBatch=1;
+function setBatch(n,el){selectedBatch=n;document.querySelectorAll(".batch").forEach(x=>x.classList.remove("active"));el.classList.add("active");}
+function setCustomBatch(){let n=Math.max(1,Math.min(50,Number(document.getElementById("customCount").value)||1));selectedBatch=n;document.querySelectorAll(".batch").forEach(x=>x.classList.remove("active"));}
+function startSelectedBattle(){const n=Math.min(selectedBatch===0?50:selectedBatch,state.sta);if(n<1){alert("スタミナが足りないよ");return}startBattle(n);}
+function startBoss(){if(state.kills<10){alert("まだ星喰みの獣には挑戦できないよ");return}state.pendingBoss=true;save();location.href="battle.html"}
+function renderForge(){
+ const weapons=[['剣',14,3,8],['斧',18,2,7],['槍',16,4,7],['弓',13,2,10],['杖',8,2,12],['魔導書',7,1,15]];
+ const armors=[['軽装',8,3],['中鎧',14,1],['重鎧',20,0],['魔装',10,8]];
+ const make=(arr,armor)=>arr.map(x=>{let name=x[0],cost=armor?10:8, owned=state.crafted.includes(name);return '<div class="listrow"><span>'+name+' <small>'+((armor?'防御 '+x[1]+' / 魔防 '+x[2]:'攻撃 '+x[1]+' / AGI '+x[3]))+'</small></span><button class="secondary" style="padding:7px 10px;font-size:13px" '+(owned?'disabled':'onclick="craft(\''+name+'\','+cost+')"')+'>'+ (owned?'製作済':'星の欠片 '+cost)+'</button></div>'}).join('');
+ const w=document.getElementById('weaponList');if(w)w.innerHTML=make(weapons,false);const a=document.getElementById('armorList');if(a)a.innerHTML=make(armors,true);
+}
+function craft(name,cost){if(state.starShard<cost){alert('星の欠片が足りないよ');return}state.starShard-=cost;state.crafted.push(name);state.notices.push({t:new Date().toLocaleTimeString('ja-JP'),m:'<span class="green">'+name+'を製作した！</span>'});save()}
+
 function openPage(page){
-  document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(page).classList.remove("hidden");
-  document.querySelectorAll(".foot").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
-  window.scrollTo({top:0,behavior:"instant"});
+  document.querySelectorAll("section").forEach(x=>x.classList.add("hidden"));
+  const target=document.getElementById(page); if(target) target.classList.remove("hidden");
+  document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x.dataset.page===page));
+  document.querySelectorAll(".foot").forEach(x=>x.classList.toggle("on",x.dataset.page===page));
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-document.querySelectorAll(".foot").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
-document.querySelectorAll(".batch").forEach(b=>b.addEventListener("click",()=>{selected=Number(b.dataset.n);document.querySelectorAll(".batch").forEach(x=>x.classList.remove("active"));b.classList.add("active")}));
-document.getElementById("exploreStart").addEventListener("click",()=>{
-  const n=selected===0?Math.min(10,state.sta):Math.min(selected,state.sta);
-  if(n<1){alert("スタミナが足りないよ");return}
-  state.pending=n;save();location.href="battle.html";
-});
-document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();sendChat()}});
-setInterval(()=>{if(state.sta<500){state.sta++;save();render()}},60000);
-render();
-</script>
-</body>
-</html>
+document.querySelectorAll(".tabs button,.foot").forEach(b=>b.onclick=()=>openPage(b.dataset.page));
+document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat()});
+function openChatBottom(){const el=document.getElementById("chatLog");el.scrollTop=el.scrollHeight}
+function updateRegen(){const els=[document.getElementById("regen"),document.getElementById("eregen")]; if(state.sta>=500){els.forEach(e=>e&&(e.textContent="満タン"));return} const last=Number(state.lastRegen||Date.now()); if(!state.lastRegen)state.lastRegen=last; const next=last+60000; const sec=Math.max(0,Math.ceil((next-Date.now())/1000)); els.forEach(e=>e&&(e.textContent=sec+"秒")); if(sec<=0){state.sta=Math.min(500,state.sta+1);state.lastRegen=Date.now();save()}}
+setInterval(updateRegen,1000);setInterval(()=>{if(state.sta<500){state.lastRegen=state.lastRegen||Date.now();updateRegen()}},1000); render();openChatBottom();
+</script></body></html>

@@ -1,62 +1,67 @@
 <!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ふかげーむ - 戦闘</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>戦闘 - ふかげーむ</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#091126;color:#202a3b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{width:min(760px,100%);margin:auto;min-height:100vh;background:linear-gradient(#101b39 0 170px,#eef2f7 170px);padding:12px 12px 34px}.top{color:#fff;padding:6px 4px 12px}.top h1{font-size:21px;margin:0}.top p{font-size:12px;color:#c5d0e8;margin:5px 0 0}.card{background:#fff;border:1px solid #dfe5ef;border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 5px 18px #07112b12}.fighters{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;text-align:center;gap:8px}.fighter{background:#f1f4f9;border-radius:12px;padding:16px 8px;font-weight:900}.vs{color:#7c89a0;font-weight:900}.enemy{background:#eef1f8;border-radius:12px;padding:16px 8px;font-weight:900}.section-head{display:flex;justify-content:space-between;align-items:center}.section-head h2{font-size:16px;margin:0}.pill{font-size:10px;border:1px solid #d8dfeb;border-radius:99px;padding:5px 8px;color:#5e6d88}.tools{display:flex;gap:7px;position:sticky;top:8px;z-index:5;justify-content:flex-end;margin:8px 0}.tool{border:1px solid #cfd8e6;background:#fff;color:#4d607f;border-radius:99px;padding:8px 11px;font-size:12px;font-weight:900;box-shadow:0 2px 8px #0002}.tool.primary{background:#253f7b;color:#fff;border-color:#253f7b}.log{font-size:12px;line-height:1.5}.turn{font-size:10px;color:#8792a4;letter-spacing:.5px;margin:8px 0 3px}.line{padding:2px 0}.result{margin-top:7px;padding:7px 9px;background:#f4f6fa;border-radius:8px;font-size:12px}.drop{font-size:11px;color:#63728b}.compact .turn,.compact .line{display:none}.compact .result,.compact .drop{display:block}.reward{margin-top:12px;padding:12px;background:#f3f5fa;border-radius:11px;font-size:13px}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.row button{border:0;border-radius:10px;padding:11px;font-weight:900;background:#294786;color:#fff}.row .back{background:#fff;color:#4f607d;border:1px solid #d7dfeb}.float{position:fixed;right:16px;bottom:18px;z-index:20;border:0;border-radius:99px;background:#253f7b;color:#fff;padding:11px 15px;font-size:12px;font-weight:900;box-shadow:0 4px 12px #0004;display:none}.float.show{display:block}.hidden{display:none}
-</style>
-</head>
-<body>
-<div class="app">
-<header class="top"><h1>戦闘</h1><p>はじまりの草原 / 星明かりの戦場</p></header>
-<div class="card"><div class="fighters"><div class="fighter">冒険者</div><div class="vs">VS</div><div class="enemy" id="enemyName">敵</div></div></div>
-<div class="card">
-  <div class="section-head"><h2>戦闘ログ</h2><span class="pill" id="countLabel">×1</span></div>
-  <div class="tools"><button class="tool primary" id="jump">↓ ログ末尾へ</button><button class="tool" id="toggle">詳細ログをたたむ</button></div>
-  <div class="log" id="log"></div>
-  <div class="reward hidden" id="reward"></div>
-</div>
-<div class="row"><button id="again">もう一度探索</button><button class="back" id="home">ホームへ戻る</button></div>
-</div>
-<button class="float" id="float">↓ 最新</button>
+*{box-sizing:border-box}body{margin:0;background:#f4e8ea;color:#293950;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}.app{max-width:760px;margin:auto;background:linear-gradient(180deg,#101a35 0,#172442 34%,#edf1f7 34%);min-height:100vh;padding:12px 16px 95px}
+.header{border-top:6px solid #df1616;border-radius:14px;padding:15px;text-align:center;box-shadow:0 2px 8px #0001}.header h1{margin:0;color:#d10b0b;font-size:28px}.header p{margin:3px;color:#c64b4b;font-weight:800}
+.fight{display:grid;grid-template-columns:1fr 75px 1fr;align-items:center;text-align:center;padding:28px 0}.fighter{font-size:42px}.vs{font-size:38px;color:#e31a1a;font-weight:900}.enemy{font-size:42px}
+.box{border:3px solid #ffc6c6;border-radius:14px;overflow:hidden}.name{background:#ffe0e0;color:#8d2020;text-align:center;font-size:20px;font-weight:900;padding:10px}.stats{display:grid;grid-template-columns:1fr 1fr}.stats div{padding:9px;text-align:center;border-top:1px solid #f1d5d5}.label{font-weight:800;color:#64748a}
+.log{padding:5px 8px}.turn{text-align:center;font-size:18px;font-weight:900;color:#4d5d74;margin:22px 0 7px}.line{padding:7px 4px;line-height:1.7}.skill{color:#322f91;font-weight:900}.heal{color:#00865f;font-weight:900}.damage b{color:#e81515;font-size:24px}.result{font-size:21px;font-weight:900;color:#111;margin-top:18px}.drop{color:#00934d;font-weight:900}.reward{background:#fffbea;border:2px solid #ffd34f;border-radius:14px;padding:15px;margin-top:18px}.reward h2{margin:0 0 10px;color:#9a5510}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.log-tools{position:sticky;top:8px;z-index:10;display:flex;justify-content:flex-end;gap:8px;margin:8px 0}.toolbtn{border:1px solid #ccd6e2;border-radius:999px;padding:8px 12px;background:#fff;color:#40536d;font-size:13px;font-weight:900;box-shadow:0 2px 7px #00000012}.toolbtn.primary{background:#2450b7;color:#fff;border-color:#2450b7}.compact .turn,.compact .line{display:none}.compact .result,.compact .drop{display:block}.log .line,.log .turn{transition:opacity .15s}.log-scroll-anchor{height:1px}.jump-label{font-size:12px}.row{margin-top:15px}button{border:0;border-radius:11px;padding:14px;font-size:17px;font-weight:900;background:#e87500;color:white;box-shadow:0 3px 0 #b65300}button.back{background:#1683bd;box-shadow:0 3px 0 #0d5e88}
+.float-jump{position:fixed;right:max(18px,calc((100vw - 760px)/2 + 18px));bottom:22px;z-index:20;border:0;border-radius:999px;padding:12px 16px;background:#2450b7;color:#fff;font-size:14px;font-weight:900;box-shadow:0 4px 12px #0003;display:none}.float-jump.show{display:block}@media(max-width:500px){.float-jump{right:18px}}
+body{background:#0c142a;color:#202b3d}.app{box-shadow:0 0 35px #0004}
+.card{border-radius:14px;border:1px solid #dfe5ee;box-shadow:0 5px 18px #07112b12}
+.log{font-size:12px;line-height:1.48}
+.turn{font-size:11px;letter-spacing:.4px}
+.line{font-size:12px}
+.result,.drop{font-size:12px}
+.toolbtn{font-size:12px}
+.toolbtn.primary{background:#253b73;border-color:#253b73}
+.float-jump{background:#253b73}
+</style></head><body><div class="app">
+<div class="header"><h1>戦闘開始！</h1><p>星見の巡礼路</p></div>
+<div class="fight"><div class="fighter">冒険者</div><div class="vs">VS</div><div class="enemy" id="enemyIcon">敵</div></div>
+<div class="box"><div class="name" id="enemyName">敵</div><div class="stats"><div><span class="label">攻撃</span><br><b id="atk">--</b></div><div><span class="label">防御</span><br><b id="def">--</b></div></div></div>
+<div class="log-tools"><button class="toolbtn primary" id="jumpBottom" type="button">↓ ログ末尾へ</button><button class="toolbtn" id="toggleLog" type="button">詳細ログをたたむ</button></div><div class="log" id="log"></div><div class="reward" id="reward" style="display:none"></div>
+<div class="row"><button onclick="location.href='index.html'">探索画面へ戻る</button><button class="back" onclick="location.href='index.html'">ホームへ戻る</button></div>
+</div><button class="float-jump" id="floatJump" type="button">↓ 最新</button>
 <script>
-const KEY="fukagame_v8";
-const enemies=[["くさねずみ","ねずみの毛",10],["つのうさぎ","硬いつの",8],["ころころスライム","粘液",7],["いたずらコボルト","獣人の爪",14],["森のまじゅつ師","魔法の枝",13],["おおきなキノコ","キノコの胞子",9]];
-function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}}}
-let state=load(),count=Math.max(1,Math.min(10,state.pending||1));
-document.getElementById("countLabel").textContent="×"+count;
-const log=document.getElementById("log"),jump=document.getElementById("jump"),toggle=document.getElementById("toggle"),float=document.getElementById("float");
-function add(html,cls="line"){const d=document.createElement("div");d.className=cls;d.innerHTML=html;log.appendChild(d)}
+let state=JSON.parse(localStorage.getItem("stella")||'{"lv":1,"exp":0,"gold":100,"sta":500,"kills":0,"notices":[],"starShard":0,"bossShard":0,"crafted":[],"lastRegen":0}');
+state.starShard??=0;state.bossShard??=0;state.crafted??=[];state.notices??=[];state.lastRegen??=Date.now();
+let boss=!!state.pendingBoss; state.pendingBoss=false; let count=state.pending||1;let enemies=[["ほしくずねずみ","星の欠片",10,5],["つきかげうさぎ","星の欠片",8,3],["ほしつぶスライム","星の欠片",7,10],["ほしよいコボルト","星の欠片",14,3],["星詠みのまじゅつ師","星の欠片",13,4],["よぞらキノコ","星の欠片",9,5]];
+function add(cls,text){let d=document.createElement("div");d.className="line "+cls;d.innerHTML=text;document.getElementById("log").appendChild(d)}
+function turn(n,arr){let d=document.createElement("div");d.innerHTML='<div class="turn">―― ターン '+n+' ――</div>'+arr.map(x=>'<div class="line '+x[0]+'">'+x[1]+'</div>').join("");document.getElementById("log").appendChild(d)}
+const logEl=document.getElementById("log");
+const jumpBtn=document.getElementById("jumpBottom");
+const floatJump=document.getElementById("floatJump");
+const toggleBtn=document.getElementById("toggleLog");
+let collapsed=false;
+function scrollToBottom(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"});floatJump.classList.remove("show")}
+function updateJump(){const nearBottom=window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-220;floatJump.classList.toggle("show",!nearBottom)}
+jumpBtn.addEventListener("click",scrollToBottom);
+floatJump.addEventListener("click",scrollToBottom);
+toggleBtn.addEventListener("click",()=>{collapsed=!collapsed;logEl.classList.toggle("compact",collapsed);toggleBtn.textContent=collapsed?"詳細ログをひらく":"詳細ログをたたむ";});
+window.addEventListener("scroll",updateJump,{passive:true});
 function run(){
- let exp=0,gold=0,mats=0;
- for(let i=0;i<count;i++){
-   const e=enemies[Math.floor(Math.random()*enemies.length)];
-   document.getElementById("enemyName").textContent=e[0];
-   let hp=28,turn=1;
-   while(hp>0&&turn<=12){
-     const dmg=10+(state.lv||1)*2+Math.floor(Math.random()*5);hp-=dmg;
-     const d=document.createElement("div");d.innerHTML='<div class="turn">―― ターン '+turn+' ――</div><div class="line">冒険者の攻撃！ <b>'+dmg+'</b> ダメージ</div>'+(hp>0?'<div class="line">'+e[0]+'の攻撃！ 冒険者に <b>'+Math.max(1,e[2]-5)+'</b> ダメージ</div>':"");log.appendChild(d);turn++;
-   }
-   const mat=1+Math.floor(Math.random()*2);mats+=mat;exp+=10;gold+=5;state.kills=(state.kills??0)+1;add("冒険者は「"+e[0]+"」を倒した！","result");add("素材獲得　"+e[1]+" ×"+mat,"drop");
+ let totalExp=0,totalGold=0,totalMat=0,totalBossMat=0;
+ for(let battle=0;battle<count;battle++){
+  let e=boss?["星喰みの獣","星の大欠片",28,12]:enemies[Math.floor(Math.random()*enemies.length)];
+  document.getElementById("enemyName").textContent=e[0];document.getElementById("atk").textContent=e[2];document.getElementById("def").textContent=e[3];
+  let ehp=boss?90:25,t=1;
+  while(ehp>0&&t<= (boss?25:12)){
+   let arr=[];let dmg=8+state.lv*2+Math.floor(Math.random()*5);ehp-=dmg;arr.push(["damage","冒険者の攻撃！ <b>"+dmg+"</b> のダメージ！"]);
+   if(t%3===0)arr.push(["heal","《応急手当》が発動！ HPが18回復した！"]);
+   if(ehp>0){let ed=Math.max(1,e[2]-6-Math.floor(Math.random()*3));arr.push(["damage",e[0]+"の攻撃！ 冒険者に <b>"+ed+"</b> のダメージ！"])}
+   turn(t,arr);t++;
+  }
+  if(boss){let mat=1+Math.floor(Math.random()*2);state.bossShard+=mat;totalBossMat+=mat;state.gold+=20;totalGold+=20;totalExp+=40;state.exp+=40;add("result","星喰みの獣を退けた！");add("drop","【ボス素材】 星の大欠片 ×"+mat);break}
+  state.kills=(state.kills||0)+1;let mat=1+Math.floor(Math.random()*2);state.starShard+=mat;state.exp+=10;state.gold+=5;totalExp+=10;totalGold+=5;totalMat+=mat;add("result","冒険者は、"+e[0]+"を倒した！");add("drop","【素材獲得】 星の欠片 ×"+mat);
  }
- state.sta=Math.max(0,(state.sta??500)-count);state.exp=(state.exp??0)+exp;state.gold=(state.gold??100)+gold;
- while(state.exp>=state.lv*20){state.exp-=state.lv*20;state.lv++;(state.notices??=[]).push({t:new Date().toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"}),m:"Lv"+state.lv+"になった！"})}
- (state.notices??=[]).push({t:new Date().toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"}),m:"探索×"+count+"完了：EXP +"+exp+" / G +"+gold+" / 素材 +"+mats});
- state.pending=0;localStorage.setItem(KEY,JSON.stringify(state));
- document.getElementById("reward").innerHTML="<b>探索×"+count+" 完了</b><br>EXP +"+exp+" / G +"+gold+" / 素材 +"+mats+"個";
- document.getElementById("reward").classList.remove("hidden");
- if(count>=10){log.classList.add("compact");toggle.textContent="詳細ログをひらく"}
- window.scrollTo({top:0,behavior:"instant"});updateFloat();
+ state.sta-=boss?1:count;
+ while(state.exp>=state.lv*20){state.exp-=state.lv*20;state.lv++;state.notices.push({t:new Date().toLocaleTimeString("ja-JP"),m:"<span class='green'>Lv"+state.lv+"になった！</span>"})}
+ state.notices.push({t:new Date().toLocaleTimeString("ja-JP"),m:(boss?"星喰みの獣 討伐完了":"探索×"+count+"完了")+"：EXP +"+totalExp+" / G +"+totalGold+" / 素材 +"+(boss?"星の大欠片 "+totalBossMat:"星の欠片 "+totalMat)});
+ localStorage.setItem("stella",JSON.stringify(state));
+ document.getElementById("reward").style.display="block";document.getElementById("reward").innerHTML="<h2>獲得報酬</h2><b>EXP +"+totalExp+"</b><br>G +"+totalGold+"<br>"+(boss?"星の大欠片 +"+totalBossMat:"星の欠片 +"+totalMat);
+ if(count>=10){collapsed=true;logEl.classList.add("compact");toggleBtn.textContent="詳細ログをひらく";} window.scrollTo({top:0,behavior:"instant"});updateJump();
 }
-function bottom(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"})}
-function updateFloat(){const near=innerHeight+scrollY>=document.documentElement.scrollHeight-180;float.classList.toggle("show",!near)}
-jump.onclick=bottom;float.onclick=bottom;addEventListener("scroll",updateFloat,{passive:true});
-toggle.onclick=()=>{log.classList.toggle("compact");toggle.textContent=log.classList.contains("compact")?"詳細ログをひらく":"詳細ログをたたむ"};
-document.getElementById("home").onclick=()=>location.href="index.html";
-document.getElementById("again").onclick=()=>location.href="index.html#explore";
 run();
-</script>
-</body>
-</html>
+</script></body></html>

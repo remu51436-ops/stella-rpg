@@ -5,13 +5,15 @@
 <title>ふかげーむ</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4e8ea;color:#26364d;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
-.app{max-width:760px;margin:auto;background:#fff;min-height:100vh;padding:10px 12px 35px}.top{padding:8px 0 10px;border-bottom:1px solid #e3e7ed}.title{text-align:center;color:#c90000;font-size:24px;font-weight:900}.sub{text-align:center;color:#c84b4b;font-weight:800}
+.app{max-width:760px;margin:auto;background:#fff;min-height:100vh;padding:10px 12px 105px}.top{padding:8px 0 10px;border-bottom:1px solid #e3e7ed}.title{text-align:center;color:#c90000;font-size:24px;font-weight:900}.sub{text-align:center;color:#c84b4b;font-weight:800}
 .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:10px}.tabs button{padding:9px 2px;border:1px solid #d7e0ea;border-radius:8px;background:#f8fafc;font-weight:800;color:#596a7f}.tabs .on{background:#1683bd;color:#fff}
 .card{border:1px solid #dce3ec;border-radius:14px;padding:14px;margin:11px 0;background:#fff;box-shadow:0 2px 7px #0000000a}.hero{border-top:6px solid #df1616;text-align:center}.hero h1{color:#d10b0b;margin:3px 0;font-size:28px}.hero p{margin:0;color:#b24a4a;font-weight:800}
 .player{border:3px solid #f4c927;border-radius:15px;overflow:hidden;background:#fffdf2}.pname{text-align:center;background:#fff1bf;color:#734317;font-size:20px;font-weight:900;padding:9px}.table{width:100%;border-collapse:collapse}.table td{border:1px solid #e5dfca;padding:8px;text-align:center}.label{font-weight:800;color:#60718a}
 .status{border:1px solid #dce3ec;border-radius:14px;padding:13px}.bar{height:9px;background:#edf1f5;border-radius:8px;overflow:hidden;margin:6px 0 12px}.bar i{display:block;height:100%;background:#347fea}.notice{padding:9px 0;border-bottom:1px solid #e6e9ed}.notice:last-child{border:0}.time{font-size:11px;color:#8a96a6}.green{color:#008e55;font-weight:900}.orange{color:#d66a00;font-weight:900}
 .action{width:100%;border:0;border-radius:12px;padding:15px;background:#e87500;color:#fff;font-size:19px;font-weight:900;box-shadow:0 3px 0 #b65300}.secondary{background:#1683bd;box-shadow:0 3px 0 #0d5e88}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .hidden{display:none}.listrow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e5e8ed}.listrow:last-child{border:0}.badge{display:inline-block;border-radius:7px;background:#ffb000;color:#fff;font-weight:900;padding:2px 7px}
+
+.chat-card{padding-bottom:0;overflow:hidden}.chat-log{height:250px;overflow-y:auto;padding-right:4px;scroll-behavior:smooth}.chat-compose{position:sticky;bottom:0;display:grid;grid-template-columns:78px 1fr 50px;gap:8px;padding:10px 0 12px;background:#fff;border-top:1px solid #e5e9ef}.chat-compose select,.chat-compose input{min-width:0;border:1px solid #dce3ec;border-radius:10px;padding:11px;font-size:15px;background:#fff}.send{border:0;border-radius:11px;background:#2450b7;color:#fff;font-size:20px;font-weight:900;box-shadow:0 3px 0 #183a88}.footer{position:fixed;z-index:30;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100vw);height:78px;background:#fff;border-top:1px solid #dfe4eb;display:grid;grid-template-columns:repeat(5,1fr);box-shadow:0 -3px 12px #0000000c;padding-bottom:env(safe-area-inset-bottom)}.foot{border:0;background:#fff;color:#8b96a6;font-size:12px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.foot span{font-size:25px;line-height:1}.foot.on{color:#b98a13}.foot.on:before{content:"";position:absolute;top:0;width:64px;height:4px;background:#d9ae35;border-radius:0 0 5px 5px}.footer button{position:relative}.quick-title{margin:0 0 8px}.placeholder-note{color:#7c8797;font-size:14px;line-height:1.7}
 </style>
 </head>
 <body><div class="app">
@@ -24,13 +26,23 @@
 <div class="card"><h2 style="margin:0 0 10px">探索状況</h2><div>スタミナ <b id="sta">500 / 500</b></div><div class="bar"><i id="stabar" style="width:100%"></i></div><div class="listrow"><span>通常モンスター撃破</span><b id="kills">0 / 10</b></div><div class="listrow"><span>ボス</span><span>10体撃破で挑戦可能</span></div></div>
 <div class="card"><h2 style="margin:0 0 10px">探索する</h2><div class="row"><button class="action" onclick="startBattle(1)">1回</button><button class="action" onclick="startBattle(10)">10回</button></div><p style="font-size:12px;color:#7b8798;text-align:center">戦闘は専用ページへ移動します。結果はホームのお知らせに記録されます。</p></div>
 <div class="card"><h2 style="margin:0 0 8px">お知らせ</h2><div id="notices"></div></div>
-<div class="card"><h2 style="margin:0 0 8px">全体チャット</h2><div class="notice"><b>システム</b>　ふかげーむへようこそ。</div><div class="notice"><b>冒険者A</b>　素材集め中！</div><div class="row"><input id="chatInput" placeholder="メッセージ" style="padding:11px;border:1px solid #dce3ec;border-radius:8px"><button class="action secondary" onclick="sendChat()">送信</button></div><div id="chat"></div></div>
+<div class="card chat-card"><h2 style="margin:0 0 8px">全体チャット</h2><div class="chat-log" id="chatLog"><div class="notice"><b>システム</b>　ふかげーむへようこそ。</div><div class="notice"><b>冒険者A</b>　素材集め中！</div><div id="chat"></div></div><div class="chat-compose"><select id="chatChannel"><option>全体</option><option>システム</option></select><input id="chatInput" placeholder="メッセージ" autocomplete="off"><button class="send" onclick="sendChat()">▶</button></div></div>
 </section>
 
+<section id="explore" class="hidden"><div class="card hero"><h1>探索</h1><p>はじまりの草原</p></div><div class="card"><h2>探索を開始</h2><p class="placeholder-note">スタミナを使って専用の戦闘画面へ移動します。</p><div class="row"><button class="action" onclick="startBattle(1)">1回</button><button class="action" onclick="startBattle(10)">10回</button></div></div><div class="card"><div class="listrow"><span>スタミナ</span><b id="esta">500 / 500</b></div><div class="listrow"><span>撃破数</span><b id="ekills">0</b></div></div></section>
+<section id="shop" class="hidden"><div class="card"><h2>商店街</h2><div class="listrow"><span>鍛冶屋</span><button class="secondary" onclick="openPage('forge')">開く</button></div><div class="listrow"><span>素材売却</span><span class="placeholder-note">準備中</span></div><div class="listrow"><span>プレイヤーマーケット</span><span class="placeholder-note">準備中</span></div></div></section>
 <section id="forge" class="hidden"><div class="card"><h2>鍛冶屋</h2><div class="listrow"><span>見習いの剣</span><b>+0</b></div><button class="action">製作</button></div></section>
 <section id="character" class="hidden"><div class="card"><h2>キャラクター</h2><div class="listrow"><span>Lv</span><b id="clv">1</b></div><div class="listrow"><span>POW</span><b>0</b></div><div class="listrow"><span>INT</span><b>0</b></div><div class="listrow"><span>AGI</span><b>0</b></div><div class="listrow"><span>LUK</span><b>0</b></div></div></section>
 <section id="pet" class="hidden"><div class="card"><h2>ペット</h2><p>まだペットはいない。</p></div></section>
 <section id="info" class="hidden"><div class="card"><h2>モンスター図鑑</h2><div id="ency"></div></div></section>
+
+<nav class="footer">
+  <button class="foot on" data-page="home"><span>🏠</span><b>街</b></button>
+  <button class="foot" data-page="explore"><span>🔎</span><b>探索</b></button>
+  <button class="foot" data-page="character"><span>⚔</span><b>冒険者</b></button>
+  <button class="foot" data-page="shop"><span>🔨</span><b>商店街</b></button>
+  <button class="foot" data-page="info"><span>📖</span><b>情報</b></button>
+</nav>
 </div>
 <script>
 const enemies=["くさねずみ","つのうさぎ","ころころスライム","いたずらコボルト","森のまじゅつ師","おおきなキノコ"];
@@ -40,13 +52,22 @@ function render(){
  document.getElementById("lv").textContent=state.lv;document.getElementById("clv").textContent=state.lv;
  document.getElementById("exp").textContent=state.exp+" / "+state.lv*20;document.getElementById("gold").textContent=state.gold;
  document.getElementById("sta").textContent=state.sta+" / 500";document.getElementById("stabar").style.width=(state.sta/5)+"%";
- document.getElementById("kills").textContent=state.kills+" / 10";
+ document.getElementById("kills").textContent=state.kills+" / 10";document.getElementById("esta").textContent=state.sta+" / 500";document.getElementById("ekills").textContent=state.kills;
  document.getElementById("notices").innerHTML=state.notices.slice(-8).reverse().map(x=>'<div class="notice"><div class="time">'+x.t+'</div>'+x.m+'</div>').join("")||'<div class="time">まだお知らせはありません。</div>';
  document.getElementById("chat").innerHTML=state.chat.slice(-5).map(x=>'<div class="notice"><b>'+x.n+'</b>　'+x.m+'</div>').join("");
  document.getElementById("ency").innerHTML=enemies.map(x=>'<div class="listrow"><span>'+x+'</span><span>未確認</span></div>').join("");
 }
 function startBattle(count){if(state.sta<count){alert("スタミナが足りないよ");return} state.pending=count;save();location.href="battle.html"}
 function sendChat(){let v=document.getElementById("chatInput").value.trim();if(!v)return;state.chat.push({n:"冒険者",m:v});document.getElementById("chatInput").value="";save()}
-document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.querySelectorAll("section").forEach(x=>x.classList.add("hidden"));document.getElementById(b.dataset.page).classList.remove("hidden")});
-setInterval(()=>{if(state.sta<500){state.sta++;save()}},60000);render();
+function openPage(page){
+  document.querySelectorAll("section").forEach(x=>x.classList.add("hidden"));
+  const target=document.getElementById(page); if(target) target.classList.remove("hidden");
+  document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x.dataset.page===page));
+  document.querySelectorAll(".foot").forEach(x=>x.classList.toggle("on",x.dataset.page===page));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".tabs button,.foot").forEach(b=>b.onclick=()=>openPage(b.dataset.page));
+document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat()});
+function openChatBottom(){const el=document.getElementById("chatLog");el.scrollTop=el.scrollHeight}
+setInterval(()=>{if(state.sta<500){state.sta++;save()}},60000);render();openChatBottom();
 </script></body></html>

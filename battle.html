@@ -2,23 +2,34 @@
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>戦闘 - ふかげーむ</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f4e8ea;color:#293950;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}.app{max-width:760px;margin:auto;background:#fff;min-height:100vh;padding:12px 16px 40px}
+*{box-sizing:border-box}body{margin:0;background:#f4e8ea;color:#293950;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}.app{max-width:760px;margin:auto;background:#fff;min-height:100vh;padding:12px 16px 95px}
 .header{border-top:6px solid #df1616;border-radius:14px;padding:15px;text-align:center;box-shadow:0 2px 8px #0001}.header h1{margin:0;color:#d10b0b;font-size:28px}.header p{margin:3px;color:#c64b4b;font-weight:800}
 .fight{display:grid;grid-template-columns:1fr 75px 1fr;align-items:center;text-align:center;padding:28px 0}.fighter{font-size:42px}.vs{font-size:38px;color:#e31a1a;font-weight:900}.enemy{font-size:42px}
 .box{border:3px solid #ffc6c6;border-radius:14px;overflow:hidden}.name{background:#ffe0e0;color:#8d2020;text-align:center;font-size:20px;font-weight:900;padding:10px}.stats{display:grid;grid-template-columns:1fr 1fr}.stats div{padding:9px;text-align:center;border-top:1px solid #f1d5d5}.label{font-weight:800;color:#64748a}
-.log{padding:5px 8px}.turn{text-align:center;font-size:18px;font-weight:900;color:#4d5d74;margin:22px 0 7px}.line{padding:7px 4px;line-height:1.7}.skill{color:#322f91;font-weight:900}.heal{color:#00865f;font-weight:900}.damage b{color:#e81515;font-size:24px}.result{font-size:21px;font-weight:900;color:#111;margin-top:18px}.drop{color:#00934d;font-weight:900}.reward{background:#fffbea;border:2px solid #ffd34f;border-radius:14px;padding:15px;margin-top:18px}.reward h2{margin:0 0 10px;color:#9a5510}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}button{border:0;border-radius:11px;padding:14px;font-size:17px;font-weight:900;background:#e87500;color:white;box-shadow:0 3px 0 #b65300}button.back{background:#1683bd;box-shadow:0 3px 0 #0d5e88}
-</style></head><body><div class="app">
+.log{padding:5px 8px}.turn{text-align:center;font-size:18px;font-weight:900;color:#4d5d74;margin:22px 0 7px}.line{padding:7px 4px;line-height:1.7}.skill{color:#322f91;font-weight:900}.heal{color:#00865f;font-weight:900}.damage b{color:#e81515;font-size:24px}.result{font-size:21px;font-weight:900;color:#111;margin-top:18px}.drop{color:#00934d;font-weight:900}.reward{background:#fffbea;border:2px solid #ffd34f;border-radius:14px;padding:15px;margin-top:18px}.reward h2{margin:0 0 10px;color:#9a5510}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.log-tools{position:sticky;top:8px;z-index:10;display:flex;justify-content:flex-end;gap:8px;margin:8px 0}.toolbtn{border:1px solid #ccd6e2;border-radius:999px;padding:8px 12px;background:#fff;color:#40536d;font-size:13px;font-weight:900;box-shadow:0 2px 7px #00000012}.toolbtn.primary{background:#2450b7;color:#fff;border-color:#2450b7}.compact .turn,.compact .line{display:none}.compact .result,.compact .drop{display:block}.log .line,.log .turn{transition:opacity .15s}.log-scroll-anchor{height:1px}.jump-label{font-size:12px}.row{margin-top:15px}button{border:0;border-radius:11px;padding:14px;font-size:17px;font-weight:900;background:#e87500;color:white;box-shadow:0 3px 0 #b65300}button.back{background:#1683bd;box-shadow:0 3px 0 #0d5e88}
+.float-jump{position:fixed;right:max(18px,calc((100vw - 760px)/2 + 18px));bottom:22px;z-index:20;border:0;border-radius:999px;padding:12px 16px;background:#2450b7;color:#fff;font-size:14px;font-weight:900;box-shadow:0 4px 12px #0003;display:none}.float-jump.show{display:block}@media(max-width:500px){.float-jump{right:18px}}</style></head><body><div class="app">
 <div class="header"><h1>戦闘開始！</h1><p>はじまりの草原</p></div>
 <div class="fight"><div class="fighter">冒険者</div><div class="vs">VS</div><div class="enemy" id="enemyIcon">敵</div></div>
 <div class="box"><div class="name" id="enemyName">敵</div><div class="stats"><div><span class="label">攻撃</span><br><b id="atk">--</b></div><div><span class="label">防御</span><br><b id="def">--</b></div></div></div>
-<div class="log" id="log"></div><div class="reward" id="reward" style="display:none"></div>
+<div class="log-tools"><button class="toolbtn primary" id="jumpBottom" type="button">↓ ログ末尾へ</button><button class="toolbtn" id="toggleLog" type="button">詳細ログをたたむ</button></div><div class="log" id="log"></div><div class="reward" id="reward" style="display:none"></div>
 <div class="row"><button onclick="location.href='index.html'">探索画面へ戻る</button><button class="back" onclick="location.href='index.html'">ホームへ戻る</button></div>
-</div>
+</div><button class="float-jump" id="floatJump" type="button">↓ 最新</button>
 <script>
 let state=JSON.parse(localStorage.getItem("stella")||'{"lv":1,"exp":0,"gold":100,"sta":500,"kills":0,"notices":[]}');
 let count=state.pending||1;let enemies=[["くさねずみ","ねずみの毛",10,5],["つのうさぎ","硬いつの",8,3],["ころころスライム","粘液",7,10],["いたずらコボルト","獣人の爪",14,3],["森のまじゅつ師","魔法の枝",13,4],["おおきなキノコ","胞子",9,5]];
 function add(cls,text){let d=document.createElement("div");d.className="line "+cls;d.innerHTML=text;document.getElementById("log").appendChild(d)}
 function turn(n,arr){let d=document.createElement("div");d.innerHTML='<div class="turn">―― ターン '+n+' ――</div>'+arr.map(x=>'<div class="line '+x[0]+'">'+x[1]+'</div>').join("");document.getElementById("log").appendChild(d)}
+const logEl=document.getElementById("log");
+const jumpBtn=document.getElementById("jumpBottom");
+const floatJump=document.getElementById("floatJump");
+const toggleBtn=document.getElementById("toggleLog");
+let collapsed=false;
+function scrollToBottom(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"});floatJump.classList.remove("show")}
+function updateJump(){const nearBottom=window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-220;floatJump.classList.toggle("show",!nearBottom)}
+jumpBtn.addEventListener("click",scrollToBottom);
+floatJump.addEventListener("click",scrollToBottom);
+toggleBtn.addEventListener("click",()=>{collapsed=!collapsed;logEl.classList.toggle("compact",collapsed);toggleBtn.textContent=collapsed?"詳細ログをひらく":"詳細ログをたたむ";});
+window.addEventListener("scroll",updateJump,{passive:true});
 function run(){
  let totalExp=0,totalGold=0,totalMat=0, lastName="";
  for(let battle=0;battle<count;battle++){
@@ -40,6 +51,8 @@ function run(){
  state.notices.push({t:new Date().toLocaleTimeString("ja-JP"),m:"探索×"+count+"完了：EXP +"+totalExp+" / G +"+totalGold+" / 素材 +"+totalMat});
  localStorage.setItem("stella",JSON.stringify(state));
  document.getElementById("reward").style.display="block";document.getElementById("reward").innerHTML="<h2>獲得報酬</h2><b>EXP +"+totalExp+"</b><br>G +"+totalGold+"<br>素材 +"+totalMat+"個";
+if(count>=10){collapsed=true;logEl.classList.add("compact");toggleBtn.textContent="詳細ログをひらく";}
+window.scrollTo({top:0,behavior:"instant"});updateJump();
 }
 run();
 </script></body></html>

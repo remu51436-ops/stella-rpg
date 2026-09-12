@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ステラプロジェクト 試作版</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#11131a;color:#f4f4f6;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:680px;margin:auto;padding:16px}.title{font-size:23px;font-weight:800;margin-bottom:12px}
+.panel{background:#22252f;border:1px solid #393d4b;border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:16px;margin:0 0 10px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.stat{background:#191b23;border-radius:9px;padding:9px}.label{font-size:11px;color:#aeb2c0}.value{font-weight:700;margin-top:3px}
+button{appearance:none;-webkit-appearance:none;display:block;width:100%;border:0;border-radius:11px;padding:14px 10px;margin-top:8px;background:#626be0;color:#fff;font-size:16px;font-weight:800;touch-action:manipulation}
+button:active{transform:scale(.98)}button:disabled{opacity:.45}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #363946}
+.small{font-size:12px;color:#b8bbc7}.log{height:200px;overflow:auto;background:#15171e;border-radius:10px;padding:10px;font-size:13px;line-height:1.55;white-space:pre-wrap}
+.notice{background:#303447;border-radius:10px;padding:10px;margin-bottom:8px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="title">ステラプロジェクト（仮）</div>
+
+<div class="panel">
+<h2>冒険者</h2>
+<div class="stats">
+<div class="stat"><div class="label">Lv</div><div class="value" id="lv">1</div></div>
+<div class="stat"><div class="label">EXP</div><div class="value" id="exp">0 / 20</div></div>
+<div class="stat"><div class="label">ゴールド</div><div class="value" id="gold">100</div></div>
+<div class="stat"><div class="label">スタミナ</div><div class="value" id="sta">500 / 500</div></div>
+<div class="stat"><div class="label">攻撃</div><div class="value" id="atk">12</div></div>
+<div class="stat"><div class="label">防御</div><div class="value" id="def">6</div></div>
+</div>
+</div>
+
+<div class="panel">
+<h2>はじまりの草原</h2>
+<div class="notice">無属性エリア。通常敵6種、レア敵1種。通常敵を10体倒すとボスに挑戦できます。</div>
+<div class="item"><span>通常撃破数</span><b id="kills">0 / 10</b></div>
+<div class="row">
+<button type="button" id="one">探索 ×1</button>
+<button type="button" id="ten">探索 ×10</button>
+</div>
+<button type="button" id="bossBtn" disabled>草原の守護獣に挑戦</button>
+</div>
+
+<div class="panel">
+<h2>戦闘ログ</h2>
+<div class="log" id="log">探索ボタンを押してみて。</div>
+</div>
+
+<div class="panel">
+<h2>素材</h2>
+<div id="materials"><div class="small">まだ素材はない</div></div>
+</div>
+
+<div class="panel">
+<h2>鍛冶屋</h2>
+<div class="item"><span>見習いの剣</span><span id="weapon">未所持</span></div>
+<button type="button" id="craft">見習いの剣を作る（素材12・20G）</button>
+<button type="button" id="enhance">剣を強化する（20G）</button>
+</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var enemies=[
+ {name:"くさねずみ",mat:"ねずみの毛"},
+ {name:"つのうさぎ",mat:"硬いつの"},
+ {name:"ころころスライム",mat:"粘液"},
+ {name:"いたずらコボルト",mat:"獣人の爪"},
+ {name:"森のまじゅつ師",mat:"魔法の枝"},
+ {name:"おおきなキノコ",mat:"キノコの胞子"}
+];
+var s={lv:1,exp:0,gold:100,sta:500,kills:0,mats:{},weapon:-1};
+
+function id(x){return document.getElementById(x)}
+function rnd(n){return Math.floor(Math.random()*n)}
+function log(t){var e=id("log");e.textContent=t+"\\n\\n"+e.textContent}
+function totalMats(){var n=0;Object.keys(s.mats).forEach(function(k){n+=s.mats[k]});return n}
+function addExp(n){
+ s.exp+=n;
+ while(s.exp>=s.lv*20){s.exp-=s.lv*20;s.lv++;log("レベルアップ！ Lv"+s.lv);}
+}
+function render(){
+ id("lv").textContent=s.lv;
+ id("exp").textContent=s.exp+" / "+(s.lv*20);
+ id("gold").textContent=s.gold;
+ id("sta").textContent=s.sta+" / 500";
+ id("atk").textContent=10+s.lv*2+(s.weapon+1)*3;
+ id("def").textContent=5+s.lv;
+ id("kills").textContent=s.kills+" / 10";
+ id("bossBtn").disabled=s.kills<10;
+ id("weapon").textContent=s.weapon<0?"未所持":"+"+s.weapon;
+ var out="";
+ Object.keys(s.mats).forEach(function(k){
+   if(s.mats[k]>0)out+='<div class="item"><span>'+k+'</span><span>×'+s.mats[k]+'</span></div>';
+ });
+ id("materials").innerHTML=out||'<div class="small">まだ素材はない</div>';
+}
+function explore(n){
+ if(s.sta<n){log("スタミナが足りない！");return}
+ s.sta-=n;
+ var lines=[],got={},xp=0;
+ for(var i=0;i<n;i++){
+   if(Math.random()<0.04){
+     var q=1+rnd(2);
+     s.mats["きらめく粘液"]=(s.mats["きらめく粘液"]||0)+q;
+     got["きらめく粘液"]=(got["きらめく粘液"]||0)+q;
+     xp+=15;lines.push("レア敵「きらめきスライム」を撃破！");
+   }else{
+     var e=enemies[rnd(enemies.length)],q=1+rnd(2);
+     s.mats[e.mat]=(s.mats[e.mat]||0)+q;
+     got[e.mat]=(got[e.mat]||0)+q;
+     s.kills++;xp+=10;lines.push(e.name+"を撃破。");
+   }
+ }
+ addExp(xp);
+ var g=[];
+ Object.keys(got).forEach(function(k){g.push(k+" ×"+got[k])});
+ log(n+"回の探索が完了。\\n"+lines.join("\\n")+"\\n素材："+g.join("、")+"\\nEXP +"+xp);
+ render();
+}
+function boss(){
+ if(s.kills<10)return;
+ var attack=10+s.lv*2+(s.weapon+1)*3;
+ if(attack+rnd(21)>=35){
+   s.gold+=80;
+   s.mats["守護獣の毛皮"]=(s.mats["守護獣の毛皮"]||0)+1;
+   s.mats["進化コア"]=(s.mats["進化コア"]||0)+1;
+   addExp(80);
+   log("「草原の守護獣」を撃破！\\nボス素材「守護獣の毛皮」×1\\n進化コア ×1\\nEXP +80 / ゴールド +80");
+ }else{
+   log("草原の守護獣に敗北……。\\nペナルティはないよ。もう一度挑戦できる！");
+ }
+ render();
+}
+function craft(){
+ if(totalMats()<12||s.gold<20){log("素材かゴールドが足りない！");return}
+ var need=12;
+ Object.keys(s.mats).some(function(k){
+   var take=Math.min(s.mats[k],need);s.mats[k]-=take;need-=take;return need===0;
+ });
+ s.gold-=20;s.weapon=0;log("見習いの剣を製作した！");
+ render();
+}
+function enhance(){
+ if(s.weapon<0){log("先に武器を作ってね。");return}
+ if(s.weapon>=5){log("試作版では +5 が上限。");return}
+ if(totalMats()<1||s.gold<20){log("素材1個と20Gが必要！");return}
+ var ks=Object.keys(s.mats).filter(function(k){return s.mats[k]>0});
+ s.mats[ks[0]]--;s.gold-=20;s.weapon++;
+ log("見習いの剣を +"+s.weapon+" に強化！");
+ render();
+}
+id("one").addEventListener("click",function(){explore(1)});
+id("ten").addEventListener("click",function(){explore(10)});
+id("bossBtn").addEventListener("click",boss);
+id("craft").addEventListener("click",craft);
+id("enhance").addEventListener("click",enhance);
+setInterval(function(){if(s.sta<500){s.sta++;render()}},60000);
+render();
+})();
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 <title>ふかげーむ</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4e8ea;color:#26364d;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
-.app{max-width:760px;margin:auto;background:#fff;min-height:100vh;padding:10px 12px 105px}.top{padding:8px 0 10px;border-bottom:1px solid #e3e7ed}.title{text-align:center;color:#c90000;font-size:24px;font-weight:900}.sub{text-align:center;color:#c84b4b;font-weight:800}
+.app{max-width:760px;margin:auto;background:linear-gradient(180deg,#101a35 0,#172442 42%,#edf1f7 42%);min-height:100vh;padding:12px 12px 112px}.top{padding:8px 0 10px;border-bottom:1px solid #e3e7ed}.title{text-align:center;color:#c90000;font-size:24px;font-weight:900}.sub{text-align:center;color:#c84b4b;font-weight:800}
 .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:10px}.tabs button{padding:9px 2px;border:1px solid #d7e0ea;border-radius:8px;background:#f8fafc;font-weight:800;color:#596a7f}.tabs .on{background:#1683bd;color:#fff}
 .card{border:1px solid #dce3ec;border-radius:14px;padding:14px;margin:11px 0;background:#fff;box-shadow:0 2px 7px #0000000a}.hero{border-top:6px solid #df1616;text-align:center}.hero h1{color:#d10b0b;margin:3px 0;font-size:28px}.hero p{margin:0;color:#b24a4a;font-weight:800}
 .player{border:3px solid #f4c927;border-radius:15px;overflow:hidden;background:#fffdf2}.pname{text-align:center;background:#fff1bf;color:#734317;font-size:20px;font-weight:900;padding:9px}.table{width:100%;border-collapse:collapse}.table td{border:1px solid #e5dfca;padding:8px;text-align:center}.label{font-weight:800;color:#60718a}
@@ -13,12 +13,31 @@
 .action{width:100%;border:0;border-radius:12px;padding:15px;background:#e87500;color:#fff;font-size:19px;font-weight:900;box-shadow:0 3px 0 #b65300}.secondary{background:#1683bd;box-shadow:0 3px 0 #0d5e88}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .hidden{display:none}.listrow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e5e8ed}.listrow:last-child{border:0}.badge{display:inline-block;border-radius:7px;background:#ffb000;color:#fff;font-weight:900;padding:2px 7px}
 
-.chat-card{padding-bottom:0;overflow:hidden}.chat-log{height:250px;overflow-y:auto;padding-right:4px;scroll-behavior:smooth}.chat-compose{position:sticky;bottom:0;display:grid;grid-template-columns:78px 1fr 50px;gap:8px;padding:10px 0 12px;background:#fff;border-top:1px solid #e5e9ef}.chat-compose select,.chat-compose input{min-width:0;border:1px solid #dce3ec;border-radius:10px;padding:11px;font-size:15px;background:#fff}.send{border:0;border-radius:11px;background:#2450b7;color:#fff;font-size:20px;font-weight:900;box-shadow:0 3px 0 #183a88}.footer{position:fixed;z-index:30;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100vw);height:78px;background:#fff;border-top:1px solid #dfe4eb;display:grid;grid-template-columns:repeat(5,1fr);box-shadow:0 -3px 12px #0000000c;padding-bottom:env(safe-area-inset-bottom)}.foot{border:0;background:#fff;color:#8b96a6;font-size:12px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.foot span{font-size:25px;line-height:1}.foot.on{color:#b98a13}.foot.on:before{content:"";position:absolute;top:0;width:64px;height:4px;background:#d9ae35;border-radius:0 0 5px 5px}.footer button{position:relative}.quick-title{margin:0 0 8px}.placeholder-note{color:#7c8797;font-size:14px;line-height:1.7}
+.chat-card{padding-bottom:0;overflow:hidden}.chat-log{height:250px;overflow-y:auto;line-height:1.55;padding-right:4px;scroll-behavior:smooth}.chat-compose{position:sticky;bottom:0;display:grid;grid-template-columns:78px 1fr 50px;gap:8px;padding:10px 0 12px;background:#fff;border-top:1px solid #e5e9ef}.chat-compose select,.chat-compose input{min-width:0;border:1px solid #dce3ec;border-radius:10px;padding:11px;font-size:15px;background:#fff}.send{border:0;border-radius:11px;background:#2450b7;color:#fff;font-size:20px;font-weight:900;box-shadow:0 3px 0 #183a88}.footer{position:fixed;z-index:30;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100vw);height:78px;background:#fff;border-top:1px solid #dfe4eb;display:grid;grid-template-columns:repeat(5,1fr);box-shadow:0 -3px 12px #0000000c;padding-bottom:env(safe-area-inset-bottom)}.foot{border:0;background:#fff;color:#8b96a6;font-size:12px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.foot span{font-size:25px;line-height:1}.foot.on{color:#b98a13}.foot.on:before{content:"";position:absolute;top:0;width:64px;height:4px;background:#d9ae35;border-radius:0 0 5px 5px}.footer button{position:relative}.quick-title{margin:0 0 8px}.placeholder-note{color:#7c8797;font-size:14px;line-height:1.7}
+
+.explore-paper{border:2px solid #d9cdb9;border-radius:20px;padding:18px 16px 22px;background:linear-gradient(#fffdf8,#fff);box-shadow:0 4px 14px rgba(80,60,40,.08)}
+.explore-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.explore-title{font-size:25px;margin:0;color:#3f3a34}.tag{display:inline-flex;align-items:center;gap:6px;border:2px solid #4d7d5b;color:#416c4e;border-radius:14px;padding:8px 12px;font-weight:900;background:#fff}
+.gauge{height:18px;background:#ece5da;border:2px solid #dccfbd;border-radius:999px;overflow:hidden}.gauge i{display:block;height:100%;border-radius:999px;background:#4f8060}.gauge.boss i{background:#b95737}.gauge-label{display:flex;justify-content:space-between;align-items:center;margin:6px 2px 4px;font-weight:800;color:#655c52}.gauge-label strong{font-size:18px}.explore-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:12px 0;color:#655c52}.selector{display:flex;align-items:center;justify-content:space-between;border:2px solid #e0d6c6;border-radius:14px;padding:12px;margin-top:12px}.selector button{border:0;background:#eee7db;border-radius:10px;padding:8px 13px;font-weight:900}.start-big{width:100%;margin-top:14px!important;padding:15px!important;font-size:18px!important}.boss-big{background:#b95737!important}.mini-note{font-size:12px;color:#82776a;margin-top:9px}
+
+:root{--night:#101a35;--night2:#172442;--ink:#202b3d;--muted:#71809a;--line:#dfe5ee;--gold:#d7b85b;--blue:#3d65c5}
+body{margin:0;background:#0c142a;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{box-shadow:0 0 35px #0004}
+.card{background:#fff;border:1px solid #dfe5ee;border-radius:14px;box-shadow:0 5px 18px #07112b12;margin:10px 0;padding:14px}
+.night-card{background:radial-gradient(circle at 82% 18%,#5e6fbb33 0 2px,transparent 3px),radial-gradient(circle at 18% 35%,#fff8 0 1px,transparent 2px),linear-gradient(145deg,#111c3b,#24345c);color:#fff;border-color:#31436f;min-height:100px;position:relative;overflow:hidden}
+.night-card:after{content:"✦  ·  ·    ✧       ·  ✦";position:absolute;right:18px;bottom:13px;color:#dce6ff77;letter-spacing:8px;font-size:12px}
+.eyebrow{font-size:10px;letter-spacing:1.6px;color:#bfcdf5;margin-bottom:4px}.muted-light{color:#d0d9ee;margin:4px 0;font-size:13px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.section-head h2{margin:0}.pill{font-size:10px;font-weight:900;letter-spacing:1px;color:#53648a;background:#eef2f9;border:1px solid #d8dfec;border-radius:99px;padding:5px 8px}
+.explore-status{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.explore-status>div{background:#f4f6fa;border-radius:10px;padding:10px}.explore-status span{display:block;color:#7b8799;font-size:11px}.explore-status b{display:block;margin-top:3px;font-size:16px}
+.boss-gauge{margin:12px 0 16px}.gauge-head,.gauge-foot{display:flex;justify-content:space-between;align-items:center;font-size:12px}.gauge-head{margin-bottom:7px}.gauge-head span{font-weight:900;color:#4c6090}.gauge{height:11px;border-radius:99px;background:#e8edf5;overflow:hidden;border:1px solid #d8dfeb}.gauge-fill{height:100%;width:0;background:linear-gradient(90deg,#637bd0,#d2b55a);border-radius:99px;transition:width .25s}.gauge-foot{color:#8994a5;margin-top:5px;font-size:10px}
+.batch-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0}.batch{border:1px solid #d8dfeb;background:#fff;color:#61708a;border-radius:9px;padding:9px 4px;font-weight:900}.batch.active{background:#253b73;color:#fff;border-color:#253b73}.explore-start{width:100%;margin-top:3px}
+.notice{font-size:12px;line-height:1.55;margin:4px 0;color:#4d5a70}.chat-log{font-size:12px}
+.footer{background:#101a35;border-top:1px solid #2d3b60;box-shadow:0 -5px 18px #0005}.foot{background:#101a35;color:#8996b3}.foot.on{color:#e0c36d}.foot.on:before{background:#d7b85b}.foot span{font-size:22px}
+.chat-compose{background:#fff}
 </style>
 </head>
 <body><div class="app">
 <div class="top"><div class="title">ふかげーむ</div><div class="sub">はじまりの草原</div>
-<div class="tabs"><button class="on" data-page="home">探索</button><button data-page="forge">鍛冶屋</button><button data-page="character">キャラ</button><button data-page="pet">ペット</button><button data-page="info">情報</button></div></div>
+</div>
 
 <section id="home">
 <div class="card hero"><h1>探索</h1><p>はじまりの草原</p></div>
@@ -29,7 +48,38 @@
 <div class="card chat-card"><h2 style="margin:0 0 8px">全体チャット</h2><div class="chat-log" id="chatLog"><div class="notice"><b>システム</b>　ふかげーむへようこそ。</div><div class="notice"><b>冒険者A</b>　素材集め中！</div><div id="chat"></div></div><div class="chat-compose"><select id="chatChannel"><option>全体</option><option>システム</option></select><input id="chatInput" placeholder="メッセージ" autocomplete="off"><button class="send" onclick="sendChat()">▶</button></div></div>
 </section>
 
-<section id="explore" class="hidden"><div class="card hero"><h1>探索</h1><p>はじまりの草原</p></div><div class="card"><h2>探索を開始</h2><p class="placeholder-note">スタミナを使って専用の戦闘画面へ移動します。</p><div class="row"><button class="action" onclick="startBattle(1)">1回</button><button class="action" onclick="startBattle(10)">10回</button></div></div><div class="card"><div class="listrow"><span>スタミナ</span><b id="esta">500 / 500</b></div><div class="listrow"><span>撃破数</span><b id="ekills">0</b></div></div></section>
+<section id="explore" class="hidden">
+  <div class="card night-card">
+    <div class="eyebrow">EXPLORE / STARTER FIELD</div>
+    <h1>はじまりの草原</h1>
+    <p class="muted-light">星明かりの下、冒険を始めよう。</p>
+  </div>
+  <div class="card">
+    <div class="section-head"><h2>探索待機</h2><span class="pill">NORMAL</span></div>
+    <div class="explore-status">
+      <div><span>スタミナ</span><b id="esta">500 / 500</b></div>
+      <div><span>探索回数</span><b>1回 = 1スタミナ</b></div>
+    </div>
+    <div class="boss-gauge">
+      <div class="gauge-head"><b>ボス出現まで</b><span id="bossText">0 / 10</span></div>
+      <div class="gauge"><div id="bossFill" class="gauge-fill"></div></div>
+      <div class="gauge-foot"><span>通常モンスター撃破</span><span>10体でボス出現</span></div>
+    </div>
+    <div class="batch-row">
+      <button class="batch active" onclick="setBatch(1,this)">×1</button>
+      <button class="batch" onclick="setBatch(5,this)">×5</button>
+      <button class="batch" onclick="setBatch(10,this)">×10</button>
+      <button class="batch" onclick="setBatch(0,this)">全力</button>
+    </div>
+    <button class="action explore-start" onclick="startSelectedBattle()">探索開始</button>
+  </div>
+  <div class="card">
+    <div class="section-head"><h2>探索情報</h2></div>
+    <div class="listrow"><span>撃破数</span><b id="ekills">0</b></div>
+    <div class="listrow"><span>出現する敵</span><span>6種 + レア + ボス</span></div>
+    <div class="listrow"><span>属性</span><span>無属性</span></div>
+  </div>
+</section>
 <section id="shop" class="hidden"><div class="card"><h2>商店街</h2><div class="listrow"><span>鍛冶屋</span><button class="secondary" onclick="openPage('forge')">開く</button></div><div class="listrow"><span>素材売却</span><span class="placeholder-note">準備中</span></div><div class="listrow"><span>プレイヤーマーケット</span><span class="placeholder-note">準備中</span></div></div></section>
 <section id="forge" class="hidden"><div class="card"><h2>鍛冶屋</h2><div class="listrow"><span>見習いの剣</span><b>+0</b></div><button class="action">製作</button></div></section>
 <section id="character" class="hidden"><div class="card"><h2>キャラクター</h2><div class="listrow"><span>Lv</span><b id="clv">1</b></div><div class="listrow"><span>POW</span><b>0</b></div><div class="listrow"><span>INT</span><b>0</b></div><div class="listrow"><span>AGI</span><b>0</b></div><div class="listrow"><span>LUK</span><b>0</b></div></div></section>
@@ -37,11 +87,11 @@
 <section id="info" class="hidden"><div class="card"><h2>モンスター図鑑</h2><div id="ency"></div></div></section>
 
 <nav class="footer">
-  <button class="foot on" data-page="home"><span>🏠</span><b>街</b></button>
-  <button class="foot" data-page="explore"><span>🔎</span><b>探索</b></button>
-  <button class="foot" data-page="character"><span>⚔</span><b>冒険者</b></button>
-  <button class="foot" data-page="shop"><span>🔨</span><b>商店街</b></button>
-  <button class="foot" data-page="info"><span>📖</span><b>情報</b></button>
+  <button class="foot on" data-page="home"><span>⌂</span><b>街</b></button>
+  <button class="foot" data-page="explore"><span>✦</span><b>探索</b></button>
+  <button class="foot" data-page="character"><span>♜</span><b>冒険者</b></button>
+  <button class="foot" data-page="shop"><span>⚒</span><b>商店街</b></button>
+  <button class="foot" data-page="info"><span>✧</span><b>情報</b></button>
 </nav>
 </div>
 <script>
@@ -52,13 +102,29 @@ function render(){
  document.getElementById("lv").textContent=state.lv;document.getElementById("clv").textContent=state.lv;
  document.getElementById("exp").textContent=state.exp+" / "+state.lv*20;document.getElementById("gold").textContent=state.gold;
  document.getElementById("sta").textContent=state.sta+" / 500";document.getElementById("stabar").style.width=(state.sta/5)+"%";
- document.getElementById("kills").textContent=state.kills+" / 10";document.getElementById("esta").textContent=state.sta+" / 500";document.getElementById("ekills").textContent=state.kills;
+ document.getElementById("kills").textContent=state.kills+" / 10";document.getElementById("esta").textContent=state.sta+" / 500";document.getElementById("estag").style.width=(state.sta/5)+"%";document.getElementById("ekills").textContent=state.kills;const bossCount=state.kills%10;document.getElementById("bossText").textContent=bossCount+" / 10";document.getElementById("bossFill").style.width=(bossCount*10)+"%";document.getElementById("bossg").textContent=(state.kills%10)+" / 10";document.getElementById("bossbar").style.width=((state.kills%10)/10*100)+"%";document.getElementById("ecan").textContent=state.sta;document.getElementById("erem").textContent=Math.max(0,state.sta-exploreCount);document.getElementById("ecost").textContent=exploreCount;document.getElementById("ecount").textContent=exploreCount;document.getElementById("ecount2").textContent=exploreCount;document.getElementById("stafull").textContent=state.sta>=500?"スタミナ満タン":"回復中";
  document.getElementById("notices").innerHTML=state.notices.slice(-8).reverse().map(x=>'<div class="notice"><div class="time">'+x.t+'</div>'+x.m+'</div>').join("")||'<div class="time">まだお知らせはありません。</div>';
  document.getElementById("chat").innerHTML=state.chat.slice(-5).map(x=>'<div class="notice"><b>'+x.n+'</b>　'+x.m+'</div>').join("");
  document.getElementById("ency").innerHTML=enemies.map(x=>'<div class="listrow"><span>'+x+'</span><span>未確認</span></div>').join("");
 }
 function startBattle(count){if(state.sta<count){alert("スタミナが足りないよ");return} state.pending=count;save();location.href="battle.html"}
+let exploreCount=1;
+function changeExplore(n){exploreCount=Math.max(1,Math.min(10,state.sta,exploreCount+n));document.getElementById("ecount").textContent=exploreCount;document.getElementById("ecount2").textContent=exploreCount;document.getElementById("ecost").textContent=exploreCount;document.getElementById("erem").textContent=Math.max(0,state.sta-exploreCount)}
+function beginExplore(){let n=document.getElementById("allStamina").checked?Math.min(10,state.sta):exploreCount;startBattle(n)}
 function sendChat(){let v=document.getElementById("chatInput").value.trim();if(!v)return;state.chat.push({n:"冒険者",m:v});document.getElementById("chatInput").value="";save()}
+
+let selectedBatch=1;
+function setBatch(n,el){
+  selectedBatch=n;
+  document.querySelectorAll(".batch").forEach(x=>x.classList.remove("active"));
+  el.classList.add("active");
+}
+function startSelectedBattle(){
+  const n=selectedBatch===0?Math.min(10,state.sta):selectedBatch;
+  if(n<1 || state.sta<1){alert("スタミナが足りないよ");return}
+  startBattle(n);
+}
+
 function openPage(page){
   document.querySelectorAll("section").forEach(x=>x.classList.add("hidden"));
   const target=document.getElementById(page); if(target) target.classList.remove("hidden");
